@@ -3,9 +3,11 @@ const {Builder, By, Key, until} = require('selenium-webdriver');
 const fs = require("fs");
 const chrome = require('selenium-webdriver/chrome');
 let opts = new chrome.Options();
-const loginURL = 'https://www.tenjin.com';
 const dataURL = 'https://www.tenjin.com/dashboard/data_exporter?utf8=%E2%9C%93&start_date=2021-01-09&end_date=2021-02-08&granularity=daily&group_by=app_id&metrics%5B%5D=spend&metrics%5B%5D=installs&metrics%5B%5D=clicks&metrics%5B%5D=impressions&metrics%5B%5D=cpi&metrics%5B%5D=ctr&metrics%5B%5D=cvr&metrics%5B%5D=tcpi&report_type=user_acquisition&button=';
-
+const userData = {
+    email: '',
+    password: ''
+}
 
 
 const parseTenjin = async function() {
@@ -21,10 +23,10 @@ const parseTenjin = async function() {
         let form = await driver.findElement(By.css('form#login-form'));
 
         let email = await form.findElement(By.css('input#login-input-email'));
-        await email.sendKeys('archstar1227@gmail.com');
+        await email.sendKeys(userData.email);
 
         let paasword = await form.findElement(By.css('input#login-input-password'));
-        await paasword.sendKeys('bizzy2712');
+        await paasword.sendKeys(userData.password);
 
         let submit = await driver.findElement(By.xpath(`//*[@type='submit']`));
         await submit.click();
@@ -52,4 +54,4 @@ const parseTenjin = async function() {
     }
 }
 
-parseTenjin();
+module.exports.parseTenjin = parseTenjin;
