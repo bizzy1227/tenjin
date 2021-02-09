@@ -11,7 +11,7 @@ const userData = {
 
 
 const parseTenjin = async function() {
-    opts.addArguments(['--ignore-certificate-errors', '--ignore-ssl-errors'])
+    opts.addArguments(['--ignore-certificate-errors', '--ignore-ssl-errors', '--headless'])
 
     let driver = await new Builder().forBrowser('chrome')
     .setChromeOptions(opts)
